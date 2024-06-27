@@ -8,7 +8,7 @@ export default function Layout() {
     <header>
     <NavbarComponent/>
     </header>
-    <main>
+    <main className='max-w-screen-xl mx-auto'>
         <Outlet/>
     </main>
     </>

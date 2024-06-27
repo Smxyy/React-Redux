@@ -1,32 +1,38 @@
-import { useState } from 'react'
-import './App.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { increment, decrement, incrementByAmount, selectValue } from './redux/features/counterSlice'
-import {Button} from 'flowbite-react'
-import NavbarComponent from './components/navbar/NavbarComponent'
+import './App.css'
+import { selectAllProducts, fetchProducts } from './redux/features/product/productSlide'
+import { useEffect } from 'react';
+import { ProductCard } from './components/common/cards/ProductCard';
 
 function App() {
-  const dispatch = useDispatch()
-  const [amount, setAmount] = useState(10);
-  //useSelector is a hook of Redux
-  const countValue = useSelector(selectValue)
-  return (
-    <>
-    <h1 className='text-blue-800 text-3xl font-bold text-center mt-5'>First Day learning Redux Toolkit</h1>
-    <h2 className='text-blue-800 text-3xl font-bold text-center mt-5'>{countValue}</h2>
-    <div className="flex flex-wrap gap-2 justify-center mt-5">
-      <Button onClick = {() => dispatch(increment())} color="purple">
-        Increase By 1
-      </Button>
-      <Button onClick = {() => dispatch(decrement())} color="pink">
-        Decrease By 1
-      </Button>
-      <Button onClick = {() => dispatch(incrementByAmount(amount))} color="blue">
-        Increase By AMount
-      </Button>
-      </div>
-    </>
-  )
+  const products = useSelector(selectAllProducts);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(fetchProducts())
+  }, []);
+  //console.log("product", products);
+  return <>
+  <h1 className="text-3xl font-bold text-blue-800 text-center">
+    Our Products
+    </h1>
+    <section className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 px-20 mt-5'>
+    {
+        products.map((product, index) =>{
+            return (
+            <ProductCard 
+            key={index} 
+            image = {product.image} 
+            title = {product.name}
+            price = {product.price}
+            desc = {product.desc}
+            id = {product.id}
+            qty = {1}
+            />
+            )
+        })
+    }
+    </section>
+  </>;
 }
 
 export default App

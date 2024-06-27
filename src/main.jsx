@@ -14,6 +14,9 @@ import AboutUs from './page/about-us/AboutUs.jsx'
 import Products from './page/products/Products.jsx'
 import ContactUs from './page/contact-us/ContactUs.jsx'
 import Error from './page/error-page/Error.jsx'
+import Count from './page/counter/Count.jsx'
+import ProductDetail from './page/product-detail/ProductDetail.jsx'
+import Cart from './page/cart/Cart.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +39,18 @@ const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUs/>
+      },
+      {
+        path: "/count",
+        element: <Count/>
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetail/>
+      },
+      {
+        path: "/cart",
+        element: <Cart/>
       }
     ]
   },
